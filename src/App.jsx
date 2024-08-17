@@ -1,10 +1,14 @@
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Container, Form, Row } from "react-bootstrap";
+import { categories } from "./Category";
+import { shops } from "./Shop";
 
 function App() {
   // eslint-disable-next-line no-unused-vars
   const [count, setCount] = useState(0);
+
+  console.log(categories[0]["name"]);
 
   return (
     <>
@@ -24,21 +28,23 @@ function App() {
 
             <Form.Group className="mb-3">
               <Form.Label>Select Shop</Form.Label>
-              <Form.Select aria-label="Default select example">
-                <option>Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </Form.Select>
+              <Form.Control as="select" aria-label="Default select example">
+                {categories.map((opt, key) => (
+                  <option value={opt.name} key={opt.id}>
+                    {opt.name}
+                  </option>
+                ))}
+              </Form.Control>
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Select Category</Form.Label>
-              <Form.Select aria-label="Default select example">
-                <option>Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </Form.Select>
+              <Form.Control as="select" aria-label="Default select example">
+                {shops.map((opt, key) => (
+                  <option value={opt.name} key={opt.id}>
+                    {opt.name}
+                  </option>
+                ))}
+              </Form.Control>
             </Form.Group>
             <Button variant="primary" type="submit">
               Submit
