@@ -1,14 +1,27 @@
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, Col, Container, Form, Row, Table } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  Container,
+  Form,
+  Modal,
+  Row,
+  Table,
+} from "react-bootstrap";
 import { categories } from "./Category";
 import { shops } from "./Shop";
+import JSConfetti from "js-confetti";
 
 function App() {
-  // eslint-disable-next-line no-unused-vars
-
   const [products, SetProduct] = useState([]);
   const [addedProductId, SetId] = useState(0);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const jsConfetti = new JSConfetti();
+
   const handleProduct = (product) => {
     if (product.addedProductIsBought) {
       product.addedProductIsBought = false;
@@ -21,6 +34,18 @@ function App() {
       "addedProductIsBought = " + product.addedProductIsBought,
       product.addedProductName
     );
+
+    const checkStatusOfProduct = (product) => {
+      return product.addedProductIsBought === true;
+    };
+
+    if (products.length != 0) {
+      if (products.every(checkStatusOfProduct)) {
+        handleShow();
+        jsConfetti.addConfetti();
+        //alert("Shopping completed!");
+      }
+    }
   };
 
   const deleteProduct = (product) => {
@@ -29,9 +54,9 @@ function App() {
       (product) => product.addedProductId !== idOfDeletedProduct
     );
     SetProduct(updatedProducts);
-    console.log(products);
-    console.log(idOfDeletedProduct);
-    console.log(updatedProducts);
+    //console.log(products);
+    //console.log(idOfDeletedProduct);
+    //console.log(updatedProducts);
   };
 
   const addProduct = (event) => {
@@ -56,10 +81,22 @@ function App() {
     }
   };
 
-  console.log(products);
-
   return (
     <>
+      <Modal show={show} onHide={handleClose} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Shopping completed!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          We hope you enjoyed shopping with us. Wish to see you again..
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
       <Container className="my-5">
         <h1>FE-1426P-1</h1>
       </Container>
