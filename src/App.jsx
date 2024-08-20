@@ -17,9 +17,13 @@ function App() {
   const [products, SetProduct] = useState([]);
   const [addedProductId, SetId] = useState(0);
   const [show, setShow] = useState(false);
+  const [showEmpty, setShowEmpty] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const handleEmptyClose = () => setShowEmpty(false);
+  const handleEmptyShow = () => setShowEmpty(true);
   const jsConfetti = new JSConfetti();
 
   const handleProduct = (product) => {
@@ -77,7 +81,9 @@ function App() {
 
       SetProduct([...products, addedProduct]);
     } else {
-      alert("Product name cannot be empty!");
+      handleEmptyShow();
+
+      //alert("Product name cannot be empty!");
     }
   };
 
@@ -85,13 +91,24 @@ function App() {
     <>
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Shopping completed!</Modal.Title>
+          <Modal.Title className="text-success">Shopping completed!</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           We hope you enjoyed shopping with us. Wish to see you again..
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="outline-success" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal show={showEmpty} onHide={handleEmptyClose} centered>
+        <Modal.Header closeButton>
+          <Modal.Title className="text-warning">Product name cannot be empty!</Modal.Title>
+        </Modal.Header>
+        <Modal.Footer>
+          <Button variant="outline-danger" onClick={handleEmptyClose}>
             Close
           </Button>
         </Modal.Footer>
