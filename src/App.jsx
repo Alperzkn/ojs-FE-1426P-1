@@ -91,7 +91,9 @@ function App() {
     <>
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title className="text-success">Shopping completed!</Modal.Title>
+          <Modal.Title className="text-success">
+            Shopping completed!
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           We hope you enjoyed shopping with us. Wish to see you again..
@@ -105,7 +107,9 @@ function App() {
 
       <Modal show={showEmpty} onHide={handleEmptyClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title className="text-warning">Product name cannot be empty!</Modal.Title>
+          <Modal.Title className="text-warning">
+            Product name cannot be empty!
+          </Modal.Title>
         </Modal.Header>
         <Modal.Footer>
           <Button variant="outline-danger" onClick={handleEmptyClose}>
@@ -115,7 +119,7 @@ function App() {
       </Modal>
 
       <Container className="my-5">
-        <h1>FE-1426P-1</h1>
+        <h1 className="text-center">OnlyJS FE-1426P-1</h1>
       </Container>
       <Container>
         <Row>
